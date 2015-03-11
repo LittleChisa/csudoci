@@ -25,7 +25,7 @@ $ tree .
 Autrement dit, il faut cloner le dépôt `https://github.com/oci1315/csudoci.git`
 dans le même dossier que votre script.
 
-## importation des modules
+## Importation des modules
 
 Pour travailler avec le module `html` du package `csudoci`, il faut faire 
 l'importation suivante : 
