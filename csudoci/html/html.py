@@ -15,9 +15,6 @@ oneline_elements = [
     'th', 'td', 'li', 'span', 'b', 'i', 'u', 'em', 'strong', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'title', 
 ]
 
-
-
-
 class E(object):
     
     def __init__(self, tag, attrs=None, void=False):
