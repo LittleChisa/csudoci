@@ -68,7 +68,11 @@ class E(object):
         else:
             return ' ' + ' '.join(['{attr}="{value}"'.format(attr=attr, value=value) for (attr, value) in attrs.items()])
         
-    def html(self, indent=0, minify=False):
+    def html(self, indent=0, minify=False, doctype=False):
+        
+        html_string = ''
+        if doctype:
+            html_string = '<!DOCTYPE html>\n'
         
         if self.void:
             template = '{startindent}<{tag}{attrs} />'
@@ -90,7 +94,7 @@ class E(object):
             content += self.content_text
             
                 
-        html_string = template.format(
+        html_string += template.format(
             tag=self.tag,
             attrs=self.html_attrs(),
             content=content,
@@ -1024,3 +1028,14 @@ class Xmp (E):
     
     def __init__(self, attrs=None):
         super().__init__('xmp', attrs, void=False)
+
+
+def test():
+    head = Meta({'charset' : 'utf-8'}) + Title().text('Module test ...') < Head()
+    body = H1().text('Module tests ...') + P().text('Ceci est un test du module ...') < Body()
+    doc = head + body < Html()
+    
+    print(doc.html(doctype=True))
+    
+if __name__ == '__main__':
+    test()
