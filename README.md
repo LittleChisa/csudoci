@@ -31,8 +31,8 @@ Pour travailler avec le module `html` du package `csudoci`, il faut faire
 l'importation suivante : 
 
 ```{python}
-from csudoci.html import *
-from csudoci.template import FileTemplate
+from csudoci.html.html import *
+from csudoci.html.template import FileTemplate
 
 # faire quelque chose avec les modules
 ```
