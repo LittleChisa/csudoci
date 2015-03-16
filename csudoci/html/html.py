@@ -12,7 +12,8 @@ TODO
 '''
 
 oneline_elements = [
-    'th', 'td', 'li', 'span', 'b', 'i', 'u', 'em', 'strong', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'title', 
+    'th', 'td', 'li', 'span', 'b', 'i', 'u', 'em', 'strong', 'h1', 'h2', 'h3',
+    'h4', 'h5', 'h6', 'title', 
 ]
 
 class E(object):
@@ -70,6 +71,9 @@ class E(object):
         html_string = ''
         if doctype:
             html_string = '<!DOCTYPE html>\n'
+            
+        # pour que ça fonctionne correctement, il faudrait qu'une balise oneline
+        # qui se trouve dans une balise oneline ne mette pas d'indentation ...
         
         if self.void:
             template = '{startindent}<{tag}{attrs} />'
@@ -90,12 +94,15 @@ class E(object):
                 content += char_indent + '   '
             content += self.content_text
             
-                
+        parent_oneline = False
+        if self.parent:
+            parent_oneline = self.parent.oneline
+
         html_string += template.format(
             tag=self.tag,
             attrs=self.html_attrs(),
             content=content,
-            startindent=char_indent * int(not minify),
+            startindent=char_indent * int(not minify) * int(not parent_oneline),
             endindent=char_indent * int(not minify and not self.oneline),
             cr=cr
         )
