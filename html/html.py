@@ -142,7 +142,16 @@ class E(object):
             return ElementList([self] + siblings)
         else:
             return ElementList([self] + [siblings])
+            
+            
+    def draw(self, level=0):
+        ''' donne une représentation textuelle de l'arbre '''
+        indent = '   '
+        print(level * indent, 'Element : ', self.tag)
         
+        for c in self.childs:
+            c.draw(level=level+1)
+            
             
 class T(E):
     
@@ -156,6 +165,11 @@ class T(E):
         else:
             char_indent = indent*'   '
         return char_indent + self.text
+        
+    def draw(self, level=0):
+        ''' donne une représentation textuelle de l'arbre '''
+        indent = '   '
+        print(level * indent, 'Text : ', self.text)
         
     def __str__(self):
         return 'Text("{text}")'.format(text=self.text)
