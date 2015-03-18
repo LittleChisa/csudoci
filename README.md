@@ -34,5 +34,8 @@ l'importation suivante :
 from csudoci.html.html import *
 from csudoci.html.template import FileTemplate
 
+# pour charger les structures de donnéest
+from csudoci.ds.stack import Stack
+
 # faire quelque chose avec les modules
 ```
