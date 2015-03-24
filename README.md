@@ -35,13 +35,16 @@ l'importation suivante :
 from csudoci.html.html import *
 from csudoci.html.template import FileTemplate
 
+# pour utiliser le parseur HTML qui construit un arbre
+from csudoci.html.parser import HTMLTreeParser
+
 # pour charger les structures de donnéest
 from csudoci.ds.stack import Stack
 
 # faire quelque chose avec les modules
 ```
 
-# Utilisation du parseur HTMLParser
+# Utilisation du parseur HTMLTreeParser
 
 Pour utiliser le parseur HTML qui définit la classae ``HTMLTreeParser``, il faut importer ``csudoci.html.parser``
 
