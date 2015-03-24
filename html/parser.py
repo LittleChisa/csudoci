@@ -90,8 +90,9 @@ def test(html):
 
     p.get_tree().draw()
     
-
-test('<ul><li>Texte 1</li><li>Texte 2</li></ul>')
-test('<ul><li><p class="salut" id="special">Du texte</p></li></ul>')
-test('<ul><li><p class="salut">Du texte</p><img src="image.jpeg" /></li></ul>')
     
+if __name__ == '__main__':
+    test('<ul><li>Texte 1</li><li>Texte 2</li></ul>')
+    test('<ul><li><p class="salut" id="special">Du texte</p></li></ul>')
+    test('<ul><li><p class="salut">Du texte</p><img src="image.jpeg" /></li></ul>')
+        

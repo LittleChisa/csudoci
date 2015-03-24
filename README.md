@@ -40,3 +40,21 @@ from csudoci.ds.stack import Stack
 
 # faire quelque chose avec les modules
 ```
+
+# Utilisation du parseur HTMLParser
+
+Pour utiliser le parseur HTML qui définit la classae ``HTMLTreeParser``, il faut importer ``csudoci.html.parser``
+
+```{python}
+>>> from csudoci.html.parser import HTMLTreeParser
+>>> html = '<ul><li><p class="salut">Du texte</p><img src="image.jpeg" /></li></ul>'
+>>> p = HTMLTreeParser()
+>>> p.feed(html)
+>>> tree = p.get_tree()
+>>> tree.draw()
+ Element :  ul
+    Element :  li
+       Element :  p
+          Text :  Du texte
+       Element :  img
+```
