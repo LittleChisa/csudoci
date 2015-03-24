@@ -1,4 +1,4 @@
-# csudoci
+# Package `csudoci`
 Modules et codes pour le cours d'option complémentaire informatique de DONC au CSUD
 
 # Installation
@@ -14,12 +14,21 @@ avec `pip`.
 
 La structure de votre dossier devrait donc ressembler à ceci :
 
+[//]: # (tree . | grep -v "pyc" pour générer l'arbre)
+
 ```{bash}
 $ tree .
-.
-├── csudoci
-│   ├── ...
-├── mon_script.py
+├── README.md
+├── __init__.py
+├── ds
+│   ├── __init__.py
+│   └── stack.py
+├── html
+│   ├── __init__.py
+│   ├── html.py
+│   ├── parser.py
+│   └── template.py
+└── setup.py
 ```
 
 Autrement dit, il faut cloner le dépôt `https://github.com/oci1315/csudoci.git`
