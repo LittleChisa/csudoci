@@ -150,7 +150,7 @@ class E(object):
     def draw(self, level=0):
         ''' donne une représentation textuelle de l'arbre '''
         indent = '   '
-        print(level * indent, 'Element : ', self.tag)
+        print(level * indent, 'Element : ', self.tag, self.html_attrs())
         
         for c in self.children:
             c.draw(level=level+1)
