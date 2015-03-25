@@ -28,7 +28,7 @@ class E(object):
         # balise correspondant à l'élément
         self.tag = tag
         # une liste des éléments enfants dans l'arbre DOM
-        self.childs = []
+        self.children = []
         # référence à l'élément parent dans l'arbre DOM
         self.parent = None
         # référence à la racine de l'arbre ... ne fonctionne pas vraiment
@@ -44,10 +44,10 @@ class E(object):
             self.oneline = True
         
     def __str__(self):
-        return 'Element({tag}, {attrs}) > ({childs})'.format(
+        return 'Element({tag}, {attrs}) > ({children})'.format(
             tag=self.tag,
             attrs=self.attrs,
-            childs=' + '.join([str(c) for c in self.childs]),
+            children=' + '.join([str(c) for c in self.children]),
         )
         
     def text(self, content_text=None):
@@ -85,7 +85,7 @@ class E(object):
         else:
             cr= '\n'
             
-        content = cr.join([child.html(indent=indent+1, minify=minify) for child in self.childs])
+        content = cr.join([child.html(indent=indent+1, minify=minify) for child in self.children])
         
         char_indent = indent*'   '
             
@@ -113,14 +113,17 @@ class E(object):
     def add_child(self, child):
         child.parent = self
         child.root = self.root 
-        self.childs.append(child)
-        
-    def add_childs(self, childs):
-        # print(childs)
-        for c in childs:
+        self.children.append(child)
+
+    def add_childs(self, children):
+        self.add_children(children)
+
+    def add_children(self, children):
+        # print(children)
+        for c in children:
             c.parent = self
             c.root = self.root
-        self.childs += childs
+        self.children += children
         
     def add_to(self, parent):
         parent.add_child(self)
@@ -129,13 +132,13 @@ class E(object):
     def __lt__(self, parent):
         return self.add_to(parent)
         
-    def __gt__(self, childs):
-        if isinstance(childs, list):
-            self.add_childs(childs)
+    def __gt__(self, children):
+        if isinstance(children, list):
+            self.add_children(children)
             return self
         else:
-            self.add_child(childs)
-            return childs
+            self.add_child(children)
+            return children
             
     def __add__(self, siblings):
         if isinstance(siblings, list):
@@ -149,7 +152,7 @@ class E(object):
         indent = '   '
         print(level * indent, 'Element : ', self.tag)
         
-        for c in self.childs:
+        for c in self.children:
             c.draw(level=level+1)
             
             
