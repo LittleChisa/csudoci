@@ -82,6 +82,7 @@ class HTMLTreeParser(HTMLParser):
             return self.stack.pop()
         else:
             raise HTMLParseError("La pile ne pas contient l'arbre à son sommet")
+            print (self.stack)
 
 # test
 def test(html):
@@ -95,4 +96,3 @@ if __name__ == '__main__':
     test('<ul><li>Texte 1</li><li>Texte 2</li></ul>')
     test('<ul><li><p class="salut" id="special">Du texte</p></li></ul>')
     test('<ul><li><p class="salut">Du texte</p><img src="image.jpeg" /></li></ul>')
-        

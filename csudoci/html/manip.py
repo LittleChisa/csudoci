@@ -8,6 +8,9 @@ généré par ``csudoci.html.parser``.
 
 '''
 
+import sys
+print(sys.path)
+
 from csudoci.html.htmltree import Ul, Li
 from csudoci.html.parser import HTMLTreeParser
 
@@ -38,7 +41,7 @@ def test():
     test_html = '''
     <html>
       <head>...</head>
-      <body>d
+      <body>
          <ul>
             <li><a href="...">...</a></li>
             <li><a href="...">...</a></li>
@@ -53,10 +56,13 @@ def test():
     </html>
     '''
 
-    tree = HTMLTreeParser().feed(test_html).get_tree()
+    p = HTMLTreeParser()
+    p.feed(test_html)
+    tree = p.get_tree()
     list_of_links = get_html_links(get_links(tree))
     html = list_of_links.html()
     print(html)
 
 if __name__ == '__main__':
+    
     test()
