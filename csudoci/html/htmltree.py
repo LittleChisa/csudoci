@@ -153,6 +153,14 @@ class E(object):
             self.add_child(children)
             return children
 
+    def __rlshift__(self, children):
+        if isinstance(children, list):
+            self.add_children(children)
+            return self
+        else:
+            self.add_child(children)
+            return children
+
     def __add__(self, siblings):
         if isinstance(siblings, list):
             return ElementList([self] + siblings)
