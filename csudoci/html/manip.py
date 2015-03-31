@@ -20,8 +20,6 @@ def get_links(tree):
         links.append(tree)
     else:
         for c in tree.children:
-            if isinstance(c, list):
-                print('liste',  c)
             links += get_links(c)
 
     return links
