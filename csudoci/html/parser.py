@@ -1,12 +1,13 @@
-from html.parser import HTMLParser
+from html.parser import HTMLParser, HTMLParseError
 
 from csudoci.ds.stack import Stack
 from csudoci.html.htmltree import E, T
 
 
-class HTMLParseError(Exception):
+class MyHTMLParseError(Exception):
 
-    def __init__(self, msg='Balise manquante, HTML non conforme'):
+    def __init__(self, msg='La pile ne contient pas un seul élément à la fin de la conversion ...', stack=None):
+        self.stack = stack
         Exception.__init__(self, msg)
 
 
@@ -14,9 +15,14 @@ class HTMLTreeParser(HTMLParser):
 
     def __init__(self, html=None):
         HTMLParser.__init__(self)
-        if html:
-            self.feed(html)
         self.stack = Stack()
+
+        try:
+            if html:
+                self.feed(html)
+
+        except HTMLParseError as e:
+            print(str(e))
 
 
     def handle_starttag(self, tag, attrs):
@@ -77,16 +83,24 @@ class HTMLTreeParser(HTMLParser):
         self.stack.push(E(tag, attr_dict))
 
     def handle_data(self, data):
+
+        if self.stack.size() == 0:
+            raise MyHTMLParseError(
+                msg="Trouvé les données '{}' en dehors de toute balise".format(data),
+                stack=self.stack
+            )
+
         if len(data.strip()) > 0:
-            self.stack.push(T(data))
+            self.stack.push(T(data.replace('\n', ' ')))
 
     def get_tree(self):
         if self.stack.size() == 1:
             return self.stack.pop()
         else:
             print('taille de la pile', self.stack.size())
-            print('pile', self.stack)
-            raise HTMLParseError("La pile ne pas contient l'arbre à son sommet")
+            for e in self.stack.to_list():
+                e.draw()
+            raise MyHTMLParseError(stack=self.stack)
 
 
 def html_to_tree(html):
