@@ -75,14 +75,16 @@ class HTMLTreeParser(HTMLParser):
         self.stack.push(E(tag, attr_dict))
 
     def handle_data(self, data):
-        self.stack.push(T(data))
+        if len(data.strip()) > 0:
+            self.stack.push(T(data))
 
     def get_tree(self):
         if self.stack.size() == 1:
             return self.stack.pop()
         else:
+            print('taille de la pile', self.stack.size())
+            print ('pile', self.stack)
             raise HTMLParseError("La pile ne pas contient l'arbre à son sommet")
-            print (self.stack)
 
 # test
 def test(html):

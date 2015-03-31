@@ -8,9 +8,6 @@ généré par ``csudoci.html.parser``.
 
 '''
 
-import sys
-print(sys.path)
-
 from csudoci.html.htmltree import Ul, Li
 from csudoci.html.parser import HTMLTreeParser
 
@@ -18,14 +15,16 @@ from csudoci.html.parser import HTMLTreeParser
 def get_links(tree):
     links = []
     root = tree
-
+    
     if root.tag == 'a':
         links.append(tree)
     else:
-        for c in tree.chilren():
+        for c in tree.children:
+            if isinstance(c, list):
+                print('liste',  c)
             links += get_links(c)
 
-            return links
+    return links
 
 
 def get_html_links(tree):
@@ -59,7 +58,8 @@ def test():
     p = HTMLTreeParser()
     p.feed(test_html)
     tree = p.get_tree()
-    list_of_links = get_html_links(get_links(tree))
+
+    list_of_links = get_html_links(tree)
     html = list_of_links.html()
     print(html)
 
