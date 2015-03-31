@@ -192,7 +192,7 @@ class T(E):
     def draw(self, level=0):
         ''' donne une représentation textuelle de l'arbre '''
         indent = '   '
-        print(level * indent, 'Text : ', self.text)
+        print(level * indent, 'Text : "{}"'.format(self.text))
 
     def __str__(self):
         return 'Text("{text}")'.format(text=self.text)
