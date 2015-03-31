@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
     name = "csudoci",
     packages = ["csudoci", "csudoci.html", "csudoci.ds"],
-    version = "0.1",
+    version = "0.3.1",
     description = "Libraries for CSUD OCI",
     author = "Cédric Donner",
     author_email = "cedonner@gmail.com",
