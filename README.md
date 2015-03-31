@@ -41,7 +41,7 @@ l'importation suivante :
 
 ```{python}
 # pour utiliser le module de génération de html
-from csudoci.html.html import *
+from csudoci.html.htmltree import *
 from csudoci.html.template import FileTemplate
 
 # pour utiliser le parseur HTML qui construit un arbre

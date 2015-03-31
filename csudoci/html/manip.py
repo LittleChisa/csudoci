@@ -8,7 +8,7 @@ généré par ``csudoci.html.parser``.
 
 '''
 
-from csudoci.html.html import Ul, Li
+from csudoci.html.htmltree import Ul, Li
 from csudoci.html.parser import HTMLTreeParser
 
 

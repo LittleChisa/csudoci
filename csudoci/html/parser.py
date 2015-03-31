@@ -1,7 +1,7 @@
 from html.parser import HTMLParser
 
 from csudoci.ds.stack import Stack
-from csudoci.html.html import E, T
+from csudoci.html.htmltree import E, T
 
 class HTMLParseError(Exception):
 
