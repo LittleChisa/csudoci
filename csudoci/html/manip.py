@@ -35,10 +35,9 @@ def get_links_as_ul(tree):
 
 
 def get_links_as_ul2(tree):
-    link_ul = ElementList(
-        [ Li().add_child(link) for link in get_links(tree) ]
-    ) < Ul()
-
+    link_ul = Ul() > [
+        Li().add_child(link) for link in get_links(tree)
+    ]
     return link_ul
 
 
@@ -61,9 +60,7 @@ def test():
     </html>
     '''
 
-    p = HTMLTreeParser()
-    p.feed(test_html)
-    tree = p.get_tree()
+    tree = HTMLTreeParser(test_html).get_tree()
 
     list_of_links = get_links_as_ul(tree)
     html = list_of_links.html()
