@@ -24,11 +24,14 @@ class Stack(object):
 
     def size(self):
         return self._size
-        
+
+    def to_list(self):
+        return self._items
+
     def __str__(self):
         return ' '.join([str(e) for e in self._items])
-        
-        
+
+
 def test():
     s = Stack()
     s.is_empty()
