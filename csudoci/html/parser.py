@@ -3,26 +3,30 @@ from html.parser import HTMLParser
 from csudoci.ds.stack import Stack
 from csudoci.html.htmltree import E, T
 
+
 class HTMLParseError(Exception):
 
     def __init__(self, msg='Balise manquante, HTML non conforme'):
         Exception.__init__(self, msg)
 
+
 class HTMLTreeParser(HTMLParser):
 
-    def __init__(self):
+    def __init__(self, html=None):
         HTMLParser.__init__(self)
+        if html:
+            self.feed(html)
         self.stack = Stack()
+
 
     def handle_starttag(self, tag, attrs):
         attr_dict = {}
         for (attr, value) in attrs:
             attr_dict[attr] = value
-            
+
         self.stack.push(E(tag, attr_dict))
 
-
-    def handle_endtag(self, tag):        
+    def handle_endtag(self, tag):
         # Lorsqu'on rencontre une balise fermante, il faut fabriquer
         # un arbre avec tous les éléments qui se trouvent sur la pile
         # jusqu'à ce qu'on rencontre la balise ouvrante qui devra être
@@ -54,7 +58,6 @@ class HTMLTreeParser(HTMLParser):
                 opening_tag_on_top = (top.tag == tag)
             except:
                 pass
-                
 
         # il faut construire un arbre dont la racine est la balise du
         # sommet de la pile et dont les sous-arbres sont les arbres
@@ -65,7 +68,6 @@ class HTMLTreeParser(HTMLParser):
             tree.add_child(tmp_stack.pop())
 
         self.stack.push(tree)
-        
 
     def handle_startendtag(self, tag, attrs):
         attr_dict = {}
@@ -83,8 +85,14 @@ class HTMLTreeParser(HTMLParser):
             return self.stack.pop()
         else:
             print('taille de la pile', self.stack.size())
-            print ('pile', self.stack)
+            print('pile', self.stack)
             raise HTMLParseError("La pile ne pas contient l'arbre à son sommet")
+
+
+def html_to_tree(html):
+    p = HTMLTreeParser(html)
+    return p.get_tree()
+
 
 # test
 def test(html):
@@ -92,8 +100,8 @@ def test(html):
     p.feed(html)
 
     p.get_tree().draw()
-    
-    
+
+
 if __name__ == '__main__':
     test('<ul><li>Texte 1</li><li>Texte 2</li></ul>')
     test('<ul><li><p class="salut" id="special">Du texte</p></li></ul>')
