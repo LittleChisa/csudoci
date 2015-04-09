@@ -7,10 +7,19 @@ Pour installer le package, il faut pour le moment l'installer avec
 
 ```{bash}
 $ git clone https://github.com/oci1315/csudoci.git
+$ cd csudoci
+$ python3 setup.py build
+$ python3 setup.py install
 ```
 
-car le package n'est pas encore packagé de manière correcte pour une installation 
-avec `pip`.
+Ces commandes vont installer le package de manière globale sur le système pour
+qu'il soit possible de l'utiliser depuis n'importe où avec un simple import 
+
+```{python}
+from csudoci.html import htmltree
+```
+
+pour importer le module `csudoci.html.htmltree`.
 
 La structure de votre dossier devrait donc ressembler à ceci :
 
