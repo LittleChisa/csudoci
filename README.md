@@ -9,7 +9,7 @@ Pour installer le package, il faut pour le moment l'installer avec
 $ git clone https://github.com/oci1315/csudoci.git
 $ cd csudoci
 $ python3 setup.py build
-$ python3 setup.py install
+$ sudo python3 setup.py install
 ```
 
 Ces commandes vont installer le package de manière globale sur le système pour
