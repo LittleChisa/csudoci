@@ -40,6 +40,23 @@ $ tree .
 └── setup.py
 ```
 
+
+## Synchroniser sa copie local du dépôt avec cette version sur GitHub
+
+Pour synchroniser sa copie locale avec le dépôt GitHub,
+par exemple après l'application d'un correctif, il faut exécuter les
+instructions suivantes dans un terminal :
+
+```bash
+# se rendre dans la racine du dépôt `csudoci`
+$ cd csudoci
+# synchroniser le dépôt avec le dépôt original
+$ git pull
+# installer le package modifié
+$ sudo python3 setup.py install
+```
+
+
 ## Importation des modules
 
 Pour travailler avec le module `html` du package `csudoci`, il faut faire 
