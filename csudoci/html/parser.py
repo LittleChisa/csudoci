@@ -84,13 +84,20 @@ class HTMLTreeParser(HTMLParser):
 
     def handle_data(self, data):
 
-        if self.stack.size() == 0:
-            raise MyHTMLParseError(
-                msg="Trouvé les données '{}' en dehors de toute balise".format(data),
-                stack=self.stack
-            )
+        # ces lignes sont strop violentes dans le sens qu'elles détectent à
+        # tort des erreurs où il n'y en a pas
 
         if len(data.strip()) > 0:
+            
+            # si la pile est vide, ce serait une erreur d'y placer du HTML
+            if self.stack.size() == 0:
+                raise MyHTMLParseError(
+                    msg="Trouvé les données '{}' en dehors de toute balise".format(data),
+                    stack=self.stack
+                )
+                
+            # print('pushing', data)
+            # print('stack size', self.stack.size())
             self.stack.push(T(data.replace('\n', ' ')))
 
     def get_tree(self):
