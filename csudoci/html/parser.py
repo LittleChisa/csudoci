@@ -99,6 +99,21 @@ class HTMLTreeParser(HTMLParser):
             # print('pushing', data)
             # print('stack size', self.stack.size())
             self.stack.push(T(data.replace('\n', ' ')))
+            
+            
+    def handle_decl(self, decl):
+        ''' 
+        
+        Permet de ne pas produire d'erreur lorsque le fichier à parser
+        contient la déclaration doctype. 
+        
+        Cette méthode ne fait rien. Elle ignore simplement la déclaration du
+        doctype. La déclaration n'étant pas considérée comme un élément du
+        document HTML, il n'y a pas de raison de l'inclure dans l'arbre
+        du document.
+        
+        '''
+        pass
 
     def get_tree(self):
         if self.stack.size() == 1:
@@ -124,6 +139,7 @@ def test(html):
 
 
 if __name__ == '__main__':
+    test('<!DOCTYPE html><html><body></body></html>')
     test('<ul><li>Texte 1</li><li>Texte 2</li></ul>')
     test('<ul><li><p class="salut" id="special">Du texte</p></li></ul>')
     test('<ul><li><p class="salut">Du texte</p><img src="image.jpeg" /></li></ul>')
